@@ -1,0 +1,10 @@
+apply plugin: 'com.android.library'
+
+android {
+
+}
+
+dependencies {
+    implementation "org.mockito:mockito-core:$versions.mockito"
+    implementation "junit:junit:$versions.junit"
+}
