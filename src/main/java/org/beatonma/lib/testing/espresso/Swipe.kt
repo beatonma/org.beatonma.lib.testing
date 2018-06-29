@@ -3,13 +3,9 @@
 package org.beatonma.lib.testing.espresso
 
 import androidx.test.espresso.ViewAction
-import androidx.test.espresso.action.CoordinatesProvider
-import androidx.test.espresso.action.GeneralSwipeAction
-import androidx.test.espresso.action.Press
-import androidx.test.espresso.action.Swipe
-import androidx.test.espresso.action.ViewActions
-import org.beatonma.lib.core.kotlin.extensions.heightF
-import org.beatonma.lib.core.kotlin.extensions.widthF
+import androidx.test.espresso.action.*
+import org.beatonma.lib.util.kotlin.extensions.heightF
+import org.beatonma.lib.util.kotlin.extensions.widthF
 import org.junit.Assert
 import kotlin.math.max
 import kotlin.math.min
