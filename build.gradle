@@ -5,6 +5,11 @@ android {
 }
 
 dependencies {
-    implementation "org.mockito:mockito-core:$versions.mockito"
     implementation "junit:junit:$versions.junit"
+    implementation "org.mockito:mockito-core:$versions.mockito"
+    implementation("androidx.test.espresso:espresso-core:$versions.espresso", {
+        exclude group: 'com.android.support', module: 'support-annotations'
+    })
+
+    implementation project(":core")
 }
