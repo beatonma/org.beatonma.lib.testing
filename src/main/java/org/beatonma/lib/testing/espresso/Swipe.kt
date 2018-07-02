@@ -2,6 +2,7 @@
 
 package org.beatonma.lib.testing.espresso
 
+import android.util.Log
 import androidx.test.espresso.ViewAction
 import androidx.test.espresso.action.*
 import org.beatonma.lib.util.kotlin.extensions.heightF
@@ -15,15 +16,19 @@ private const val EDGE_FUZZ_FACTOR = 0.06F
 /**
  * Swipe vertically along the center-line of the view.
  */
-fun swipeVertical(distance: Float = .25F, startY: Float = .5F, speed: Swipe = Swipe.FAST): ViewAction {
-    return swipe(distanceY = distance, startY = startY, speed = speed)
+fun swipeVertical(distance: Float = .25F,
+                  startX: Float = .5F, startY: Float = .5F,
+                  speed: Swipe = Swipe.FAST): ViewAction {
+    return swipe(distanceY = distance, startX = startX, startY = startY, speed = speed)
 }
 
 /**
  * Swipe horizontally along the center-line of the view.
  */
-fun swipeHorizontal(distance: Float = .25F, startX: Float = .5F, speed: Swipe = Swipe.FAST): ViewAction {
-    return swipe(distanceX = distance, startX = startX, speed = speed)
+fun swipeHorizontal(distance: Float = .25F,
+                    startX: Float = .5F, startY: Float = .5F,
+                    speed: Swipe = Swipe.FAST): ViewAction {
+    return swipe(distanceX = distance, startX = startX, startY = startY, speed = speed)
 }
 
 /**
@@ -60,8 +65,10 @@ internal fun getCoordinatesProvider(x: Float = .5F, y: Float = .5F) = Coordinate
     view.getLocationOnScreen(xy)
 
     // Make sure that the coordinate is at least `inset` distance away from edge of view
-    floatArrayOf(
-            max(insetX, min(view.width - insetX, xy[0] + (x * view.widthF))),
-            max(insetY, min(view.height - insetY, xy[1] + (y * view.heightF)))
-    )
+    val xPx = max(insetX, xy[0].toFloat() + min(view.widthF - insetX, x * view.widthF))
+    val yPx = max(insetY, xy[1].toFloat() + min(view.heightF - insetY, y * view.heightF))
+
+    Log.d("coords", "($xPx, $yPx)")
+
+    floatArrayOf(xPx, yPx)
 }
