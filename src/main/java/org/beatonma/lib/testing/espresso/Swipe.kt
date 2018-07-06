@@ -2,7 +2,6 @@
 
 package org.beatonma.lib.testing.espresso
 
-import android.util.Log
 import androidx.test.espresso.ViewAction
 import androidx.test.espresso.action.*
 import org.beatonma.lib.util.kotlin.extensions.heightF
@@ -11,7 +10,7 @@ import org.junit.Assert
 import kotlin.math.max
 import kotlin.math.min
 
-private const val EDGE_FUZZ_FACTOR = 0.06F
+internal const val EDGE_FUZZ_FACTOR = 0.06F
 
 /**
  * Swipe vertically along the center-line of the view.
@@ -42,8 +41,11 @@ fun swipe(
         startY: Float = .5F,
         speed: Swipe = Swipe.FAST
 ): ViewAction {
-    val start = getCoordinatesProvider(x = startX, y = startY)
-    val end = getCoordinatesProvider(x = startX + distanceX, y = startY + distanceY)
+    // Starting coordinate must be inside the view
+    val start = getCoordinatesProvider(x = startX, y = startY, allowOutOfBounds = false)
+
+    // Ending coordinate may be anywhere
+    val end = getCoordinatesProvider(x = startX + distanceX, y = startY + distanceY, allowOutOfBounds = true)
 
     Assert.assertNotEquals(start, end)
     return ViewActions.actionWithAssertions(
@@ -54,21 +56,39 @@ fun swipe(
                     Press.FINGER))
 }
 
-
 /**
  * Defaults to center of view
  */
-internal fun getCoordinatesProvider(x: Float = .5F, y: Float = .5F) = CoordinatesProvider { view ->
+internal fun getCoordinatesProvider(
+        x: Float = .5F, y: Float = .5F, allowOutOfBounds: Boolean = false
+) = CoordinatesProvider { view ->
     val insetX = EDGE_FUZZ_FACTOR * view.widthF
     val insetY = EDGE_FUZZ_FACTOR * view.heightF
     val xy = IntArray(2)
     view.getLocationOnScreen(xy)
 
-    // Make sure that the coordinate is at least `inset` distance away from edge of view
-    val xPx = max(insetX, xy[0].toFloat() + min(view.widthF - insetX, x * view.widthF))
-    val yPx = max(insetY, xy[1].toFloat() + min(view.heightF - insetY, y * view.heightF))
+    getInsetCoordinates(x, y, xy, insetX, insetY, view.widthF, view.heightF, allowOutOfBounds)
+}
 
-    Log.d("coords", "($xPx, $yPx)")
+internal fun getInsetCoordinates(eventX: Float, eventY: Float,
+                                 viewPosition: IntArray,
+                                 insetX: Float, insetY: Float,
+                                 viewWidth: Float, viewHeight: Float,
+                                 allowOutOfBounds: Boolean): FloatArray {
 
-    floatArrayOf(xPx, yPx)
+    val x = if (allowOutOfBounds) {
+        eventX * viewWidth
+    } else {
+        max(insetX, min(viewWidth - insetX, eventX * viewWidth))
+    }
+    val y = if (allowOutOfBounds) {
+        eventY * viewHeight
+    } else {
+        max(insetY, min(viewHeight - insetY, eventY * viewHeight))
+    }
+
+    return floatArrayOf(
+            viewPosition[0] + x,
+            viewPosition[1] + y
+    )
 }
