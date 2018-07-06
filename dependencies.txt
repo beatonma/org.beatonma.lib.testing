@@ -1,6 +1,12 @@
-androidx.databinding:databinding-common:3.2.0-beta01
-androidx.databinding:databinding-runtime:3.2.0-beta01
-androidx.databinding:databinding-adapters:3.2.0-beta01
+org.beatonma.lib:util:0.9.7
+
+androidx.databinding:databinding-common:3.3.0-alpha02
+androidx.databinding:databinding-runtime:3.3.0-alpha02
+androidx.databinding:databinding-adapters:3.3.0-alpha02
+
+androidx.test.espresso:espresso-core:3.1.0-alpha1
+
+junit:junit:4.12
 
 org.jetbrains.kotlin:kotlin-stdlib-jdk7:1.2.50
 
