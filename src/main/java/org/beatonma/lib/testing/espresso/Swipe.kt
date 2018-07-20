@@ -11,22 +11,76 @@ import kotlin.math.max
 import kotlin.math.min
 
 internal const val EDGE_FUZZ_FACTOR = 0.06F
+internal const val SWIPE_SHORT = .1F
+internal const val SWIPE_LONG = .5F
 
 /**
  * Swipe vertically along the center-line of the view.
  */
-fun swipeVertical(distance: Float = .25F,
-                  startX: Float = .5F, startY: Float = .5F,
-                  speed: Swipe = Swipe.FAST): ViewAction {
+fun swipeVertical(
+        distance: Float = SWIPE_SHORT,
+        startX: Float = .5F, startY: Float = .5F,
+        speed: Swipe = Swipe.FAST
+): ViewAction {
     return swipe(distanceY = distance, startX = startX, startY = startY, speed = speed)
 }
 
 /**
  * Swipe horizontally along the center-line of the view.
  */
-fun swipeHorizontal(distance: Float = .25F,
-                    startX: Float = .5F, startY: Float = .5F,
-                    speed: Swipe = Swipe.FAST): ViewAction {
+fun swipeHorizontal(
+        distance: Float = SWIPE_SHORT,
+        startX: Float = .5F, startY: Float = .5F,
+        speed: Swipe = Swipe.FAST
+): ViewAction {
+    return swipe(distanceX = distance, startX = startX, startY = startY, speed = speed)
+}
+
+/**
+ * Swipe vertically from bottom to top (starting from view center by default)
+ * Equivalent to swipeVertical(-distance)
+ */
+fun swipeUp(
+        distance: Float = SWIPE_SHORT,
+        startX: Float = .5F, startY: Float = .5F,
+        speed: Swipe = Swipe.FAST
+): ViewAction {
+    return swipe(distanceY = -distance, startX = startX, startY = startY, speed = speed)
+}
+
+/**
+ * Swipe vertically from top to bottom (starting from view center by default)
+ * Equivalent to swipeVertical(distance)
+ */
+fun swipeDown(
+        distance: Float = SWIPE_SHORT,
+        startX: Float = .5F, startY: Float = .5F,
+        speed: Swipe = Swipe.FAST
+): ViewAction {
+    return swipe(distanceY = distance, startX = startX, startY = startY, speed = speed)
+}
+
+/**
+ * Swipe horizontally from right to left (starting from view center by default)
+ * Equivalent to swipeHorizontal(-distance)
+ */
+fun swipeLeft(
+        distance: Float = SWIPE_SHORT,
+        startX: Float = .5F, startY: Float = .5F,
+        speed: Swipe = Swipe.FAST
+): ViewAction {
+    return swipe(distanceX = -distance, startX = startX, startY = startY, speed = speed)
+}
+
+/**
+ * Swipe horizontally from left to right (starting from view center by default)
+ * Equivalent to swipeHorizontal(distance)
+ */
+fun swipeRight(
+        distance: Float = SWIPE_SHORT,
+        startX: Float = .5F, startY: Float = .5F,
+        speed: Swipe = Swipe.FAST
+): ViewAction {
     return swipe(distanceX = distance, startX = startX, startY = startY, speed = speed)
 }
 
@@ -60,8 +114,10 @@ fun swipe(
  * Defaults to center of view
  */
 internal fun getCoordinatesProvider(
-        x: Float = .5F, y: Float = .5F, allowOutOfBounds: Boolean = false
-) = CoordinatesProvider { view ->
+        x: Float = .5F,
+        y: Float = .5F,
+        allowOutOfBounds: Boolean = false
+): CoordinatesProvider = CoordinatesProvider { view ->
     val insetX = EDGE_FUZZ_FACTOR * view.widthF
     val insetY = EDGE_FUZZ_FACTOR * view.heightF
     val xy = IntArray(2)
@@ -70,11 +126,13 @@ internal fun getCoordinatesProvider(
     getInsetCoordinates(x, y, xy, insetX, insetY, view.widthF, view.heightF, allowOutOfBounds)
 }
 
-internal fun getInsetCoordinates(eventX: Float, eventY: Float,
-                                 viewPosition: IntArray,
-                                 insetX: Float, insetY: Float,
-                                 viewWidth: Float, viewHeight: Float,
-                                 allowOutOfBounds: Boolean): FloatArray {
+internal fun getInsetCoordinates(
+        eventX: Float, eventY: Float,
+        viewPosition: IntArray,
+        insetX: Float, insetY: Float,
+        viewWidth: Float, viewHeight: Float,
+        allowOutOfBounds: Boolean
+): FloatArray {
 
     val x = if (allowOutOfBounds) {
         eventX * viewWidth
