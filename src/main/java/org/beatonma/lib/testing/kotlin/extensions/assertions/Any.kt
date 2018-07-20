@@ -12,7 +12,7 @@ internal class NullReceiverException(
  * Convenience for [JUnit.assertNull]([this])
  */
 fun Any?.assertNull(message: String?) {
-    JUnit.assertNull(this)
+    JUnit.assertNull(message, this)
 }
 
 /**
