@@ -4,6 +4,8 @@ dependencies {
     implementation("$module_dependencies.testing.espresso", {
         exclude group: 'com.android.support', module: 'support-annotations'
     })
+    implementation "$module_dependencies.testing.runner"
+    implementation "$module_dependencies.google.annotations"
 
     implementation "$module_dependencies.google.appcompat"
 
