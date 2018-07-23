@@ -1,6 +1,7 @@
 @file:JvmName("Any")
 package org.beatonma.lib.testing.kotlin.extensions.assertions
 
+import kotlin.reflect.KClass
 import org.junit.Assert as JUnit
 
 
@@ -34,4 +35,32 @@ fun Any?.assertEquals(expected: Any?, message: String? = null) {
  */
 fun Any?.assertNotEquals(unexpected: Any?, message: String? = null) {
     JUnit.assertNotEquals(message, unexpected, this)
+}
+
+/**
+ * Assert that the receiver is an instance of the given Kotlin class
+ */
+fun Any?.assertInstanceOf(cls: KClass<*>, message: String? = null) {
+    JUnit.assertTrue(message, cls.isInstance(this))
+}
+
+/**
+ * Assert that the receiver is an instance of the given Java class
+ */
+fun Any?.assertInstanceOf(cls: Class<*>, message: String? = null) {
+    JUnit.assertTrue(message, cls.isInstance(this))
+}
+
+/**
+ * Assert that the receiver is not an instance of the given Kotlin class
+ */
+fun Any?.assertNotInstanceOf(cls: KClass<*>, message: String? = null) {
+    JUnit.assertFalse(message, cls.isInstance(this))
+}
+
+/**
+ * Assert that the receiver is not an instance of the given Java class
+ */
+fun Any?.assertNotInstanceOf(cls: Class<*>, message: String? = null) {
+    JUnit.assertFalse(message, cls.isInstance(this))
 }
