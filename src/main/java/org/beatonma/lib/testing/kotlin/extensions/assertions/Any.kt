@@ -11,7 +11,7 @@ internal class NullReceiverException(
 /**
  * Convenience for [JUnit.assertNull]([this])
  */
-fun Any?.assertNull(message: String?) {
+fun Any?.assertNull(message: String? = null) {
     JUnit.assertNull(message, this)
 }
 
