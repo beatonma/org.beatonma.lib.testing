@@ -123,9 +123,14 @@ fun Int?.assertFuzzyEquals(expected: Int, fuzz: Int = 1, message: String? = null
         JUnit.assertEquals(message, expected, this)
     } else {
         this?.let {
-            JUnit.assertTrue("[expected $expected, actual $this] $message", this >= expected - fuzz)
-            JUnit.assertTrue("[expected $expected, actual $this] $message", this <= expected + fuzz)
+            JUnit.assertTrue("[expected $expected, actual $this] $message", this.fuzzyEquals(expected, fuzz = fuzz))
             println("(actual) $this != $expected (expected) but is within acceptable range (+/-$fuzz inclusive)")
         } ?: throw NullReceiverException("assertFuzzyEquals", message)
     }
 }
+
+/**
+ * Not an assertion but may be used
+ */
+fun Int.fuzzyEquals(expected: Int, fuzz: Int = 1): Boolean =
+        this >= expected - fuzz && this <= expected + fuzz
