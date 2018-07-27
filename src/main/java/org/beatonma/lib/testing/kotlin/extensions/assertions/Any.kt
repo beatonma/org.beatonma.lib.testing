@@ -40,27 +40,27 @@ fun Any?.assertNotEquals(unexpected: Any?, message: String? = null) {
 /**
  * Assert that the receiver is an instance of the given Kotlin class
  */
-fun Any?.assertInstanceOf(cls: KClass<*>, message: String? = null) {
+fun Any?.assertInstanceOf(cls: KClass<*>, message: String? = "$this should be an instance of $cls") {
     JUnit.assertTrue(message, cls.isInstance(this))
 }
 
 /**
  * Assert that the receiver is an instance of the given Java class
  */
-fun Any?.assertInstanceOf(cls: Class<*>, message: String? = null) {
+fun Any?.assertInstanceOf(cls: Class<*>, message: String? = "$this should be an instance of $cls") {
     JUnit.assertTrue(message, cls.isInstance(this))
 }
 
 /**
  * Assert that the receiver is not an instance of the given Kotlin class
  */
-fun Any?.assertNotInstanceOf(cls: KClass<*>, message: String? = null) {
+fun Any?.assertNotInstanceOf(cls: KClass<*>, message: String? = "$this should not be an instance of $cls") {
     JUnit.assertFalse(message, cls.isInstance(this))
 }
 
 /**
  * Assert that the receiver is not an instance of the given Java class
  */
-fun Any?.assertNotInstanceOf(cls: Class<*>, message: String? = null) {
+fun Any?.assertNotInstanceOf(cls: Class<*>, message: String? = "$this should not be an instance of $cls") {
     JUnit.assertFalse(message, cls.isInstance(this))
 }
