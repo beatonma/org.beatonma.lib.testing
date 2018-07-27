@@ -3,9 +3,12 @@
 package org.beatonma.lib.testing.kotlin.extensions
 
 import android.app.Activity
+import android.content.Context
 import android.content.Intent
+import android.content.res.Resources
 import androidx.test.InstrumentationRegistry
 import androidx.test.rule.ActivityTestRule
+import org.junit.Rule
 import kotlin.reflect.KClass
 
 /**
@@ -33,4 +36,27 @@ fun <T : Activity> KClass<T>.testRule(
             }
         }
     }
+}
+
+/**
+ * Base class for testing [Activities][Activity] that provides some handy shortcuts
+ */
+abstract class ActivityTest<T: Activity> {
+    @get:Rule
+    abstract val rule: ActivityTestRule<T>
+
+    val activity: T?
+        get() = rule.activity
+
+    val testContext: Context
+        get() = InstrumentationRegistry.getContext()
+
+    val testResources: Resources
+        get() = testContext.resources
+
+    val targetContext: Context
+        get() = InstrumentationRegistry.getTargetContext()
+
+    val targetResources: Resources
+        get() = targetContext.resources
 }
