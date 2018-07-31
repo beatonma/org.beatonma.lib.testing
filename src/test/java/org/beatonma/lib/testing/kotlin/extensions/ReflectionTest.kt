@@ -1,5 +1,6 @@
 package org.beatonma.lib.testing.kotlin.extensions
 
+import androidx.test.filters.SmallTest
 import org.junit.Assert.assertEquals
 import org.junit.Test
 
@@ -17,6 +18,7 @@ private class ExampleClass {
     }
 }
 
+@SmallTest
 class ReflectionTest {
     @Test
     fun editFinalField() {
