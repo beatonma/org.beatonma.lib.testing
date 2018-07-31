@@ -2,9 +2,11 @@
 
 package org.beatonma.lib.testing.espresso
 
+import androidx.test.filters.SmallTest
 import org.junit.Assert.assertEquals
 import org.junit.Test
 
+@SmallTest
 class SwipeTest {
     private val viewWidth = 100F
     private val viewHeight = 110F
