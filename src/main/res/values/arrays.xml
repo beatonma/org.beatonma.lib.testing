@@ -1,3 +1,90 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+    <integer-array name="integer_array_example_short">
+        <item>0</item>
+        <item>1</item>
+    </integer-array>
+
+    <integer-array name="integer_array_example_long">
+        <item>5</item>
+        <item>10</item>
+        <item>50</item>
+        <item>100</item>
+        <item>500</item>
+        <item>1000</item>
+        <item>6</item>
+        <item>7</item>
+        <item>8</item>
+        <item>9</item>
+    </integer-array>
+
+    <string-array name="string_array_example_short">
+        <item>@string/array_item_1</item>
+        <item>@string/array_item_2</item>
+        <item>@string/array_item_3</item>
+    </string-array>
+
+    <string-array name="string_array_example_long">
+        <item>@string/array_item_1</item>
+        <item>@string/array_item_2</item>
+        <item>@string/array_item_3</item>
+        <item>@string/array_item_4</item>
+        <item>@string/array_item_5</item>
+        <item>@string/array_item_6</item>
+        <item>@string/array_item_7</item>
+        <item>@string/array_item_8</item>
+        <item>@string/array_item_9</item>
+        <item>@string/array_item_10</item>
+        <item>@string/array_item_11</item>
+        <item>@string/array_item_12</item>
+        <item>@string/array_item_13</item>
+        <item>@string/array_item_14</item>
+        <item>@string/array_item_15</item>
+        <item>@string/array_item_16</item>
+        <item>@string/array_item_17</item>
+        <item>@string/array_item_18</item>
+        <item>@string/array_item_19</item>
+        <item>@string/array_item_20</item>
+        <item>@string/array_item_21</item>
+        <item>@string/array_item_22</item>
+        <item>@string/array_item_23</item>
+        <item>@string/array_item_24</item>
+        <item>@string/array_item_25</item>
+        <item>@string/array_item_26</item>
+        <item>@string/array_item_27</item>
+        <item>@string/array_item_28</item>
+        <item>@string/array_item_29</item>
+        <item>@string/array_item_30</item>
+    </string-array>
+
+    <string name="array_item_1">Text Item 1</string>
+    <string name="array_item_2">Text Item 2</string>
+    <string name="array_item_3">Text Item 3</string>
+    <string name="array_item_4">Text Item 4</string>
+    <string name="array_item_5">Text Item 5</string>
+    <string name="array_item_6">Text Item 6</string>
+    <string name="array_item_7">Text Item 7</string>
+    <string name="array_item_8">Text Item 8</string>
+    <string name="array_item_9">Text Item 9</string>
+    <string name="array_item_10">Text Item 10</string>
+    <string name="array_item_11">Text Item 11</string>
+    <string name="array_item_12">Text Item 12</string>
+    <string name="array_item_13">Text Item 13</string>
+    <string name="array_item_14">Text Item 14</string>
+    <string name="array_item_15">Text Item 15</string>
+    <string name="array_item_16">Text Item 16</string>
+    <string name="array_item_17">Text Item 17</string>
+    <string name="array_item_18">Text Item 18</string>
+    <string name="array_item_19">Text Item 19</string>
+    <string name="array_item_20">Text Item 20</string>
+    <string name="array_item_21">Text Item 21</string>
+    <string name="array_item_22">Text Item 22</string>
+    <string name="array_item_23">Text Item 23</string>
+    <string name="array_item_24">Text Item 24</string>
+    <string name="array_item_25">Text Item 25</string>
+    <string name="array_item_26">Text Item 26</string>
+    <string name="array_item_27">Text Item 27</string>
+    <string name="array_item_28">Text Item 28</string>
+    <string name="array_item_29">Text Item 29</string>
+    <string name="array_item_30">Text Item 30</string>
 </resources>
