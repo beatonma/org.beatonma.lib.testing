@@ -22,6 +22,9 @@ UI testing.
 #### Assertions
  - oneThing.assertEquals(anotherThing)
  - something.assertTrue()
+ - assertThrowsAssertionError {
+        true.assertFalse()
+   }
 
 #### Mockito
 - val mockObject = mock<ClassToMock>()
