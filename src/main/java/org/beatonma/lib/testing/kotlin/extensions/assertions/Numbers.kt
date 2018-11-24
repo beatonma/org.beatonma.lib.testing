@@ -137,5 +137,5 @@ fun Int.fuzzyEquals(expected: Int, fuzz: Int = 1): Boolean =
 
 
 fun Float.assertEquals(expected: Float, fuzz: Float = .1F, message: String? = null) {
-    JUnit.assertEquals(this, expected, fuzz)
+    JUnit.assertEquals(message, this, expected, fuzz)
 }
