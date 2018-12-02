@@ -1,6 +1,6 @@
 @file:JvmName("Click")
 
-package org.beatonma.lib.testing.espresso
+package org.beatonma.lib.testing.espresso.action
 
 import androidx.test.espresso.ViewAction
 import androidx.test.espresso.action.GeneralClickAction
