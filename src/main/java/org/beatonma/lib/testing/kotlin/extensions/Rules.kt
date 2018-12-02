@@ -25,16 +25,27 @@ fun <T : Activity> KClass<T>.testRule(
         initialTouchMode: Boolean = true,
         launchActivity: Boolean = true,
         intentBlock: ((Intent) -> Unit)? = null
-): ActivityTestRule<T> {
-    return if (intentBlock == null) ActivityTestRule(java, initialTouchMode, launchActivity)
-    else {
-        object: ActivityTestRule<T>(java, initialTouchMode, launchActivity) {
-            override fun getActivityIntent(): Intent {
-                return Intent(InstrumentationRegistry.getContext(), this@testRule.java).apply {
-                    intentBlock(this)
-                }
+): RelaunchableActivityTestRule<T> {
+    return RelaunchableActivityTestRule(java, initialTouchMode, launchActivity, intentBlock)
+}
+
+open class RelaunchableActivityTestRule<T: Activity>(
+        private val cls: Class<T>,
+        initialTouchMode: Boolean = true,
+        launchActivity: Boolean = true,
+        private val intentBlock: ((Intent) -> Unit)? = null
+): ActivityTestRule<T>(cls, initialTouchMode, launchActivity) {
+    override fun getActivityIntent(): Intent {
+        return intentBlock?.let {
+            Intent(InstrumentationRegistry.getContext(), cls).apply {
+                intentBlock.invoke(this)
             }
-        }
+        } ?: super.getActivityIntent()
+    }
+
+    fun relaunch() {
+        finishActivity()
+        launchActivity(activityIntent)
     }
 }
 
@@ -43,7 +54,7 @@ fun <T : Activity> KClass<T>.testRule(
  */
 abstract class ActivityTest<T: Activity> {
     @get:Rule
-    abstract val rule: ActivityTestRule<T>
+    abstract val rule: RelaunchableActivityTestRule<T>
 
     val activity: T?
         get() = rule.activity
