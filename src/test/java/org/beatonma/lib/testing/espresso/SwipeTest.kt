@@ -3,6 +3,8 @@
 package org.beatonma.lib.testing.espresso
 
 import androidx.test.filters.SmallTest
+import org.beatonma.lib.testing.espresso.action.EDGE_FUZZ_FACTOR
+import org.beatonma.lib.testing.espresso.action.getInsetCoordinates
 import org.junit.Assert.assertEquals
 import org.junit.Test
 
