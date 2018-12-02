@@ -1,4 +1,6 @@
 dependencies {
+    testImplementation project(":modules:ui:activity")
+
     implementation "$module_dependencies.testing.junit"
     implementation "$module_dependencies.testing.mockito"
     implementation("$module_dependencies.testing.espresso", {
