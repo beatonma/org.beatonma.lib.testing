@@ -6,7 +6,8 @@ import android.app.Activity
 import android.content.Context
 import android.content.Intent
 import android.content.res.Resources
-import androidx.test.InstrumentationRegistry
+import androidx.test.core.app.ApplicationProvider
+import androidx.test.platform.app.InstrumentationRegistry
 import androidx.test.rule.ActivityTestRule
 import org.junit.Rule
 import kotlin.reflect.KClass
@@ -37,7 +38,7 @@ open class RelaunchableActivityTestRule<T: Activity>(
 ): ActivityTestRule<T>(cls, initialTouchMode, launchActivity) {
     override fun getActivityIntent(): Intent {
         return intentBlock?.let {
-            Intent(InstrumentationRegistry.getContext(), cls).apply {
+            Intent(InstrumentationRegistry.getInstrumentation().context, cls).apply {
                 intentBlock.invoke(this)
             }
         } ?: super.getActivityIntent()
@@ -60,13 +61,13 @@ abstract class ActivityTest<T: Activity> {
         get() = rule.activity
 
     val testContext: Context
-        get() = InstrumentationRegistry.getContext()
+        get() = InstrumentationRegistry.getInstrumentation().context
 
     val testResources: Resources
         get() = testContext.resources
 
     val targetContext: Context
-        get() = InstrumentationRegistry.getTargetContext()
+        get() = ApplicationProvider.getApplicationContext()
 
     val targetResources: Resources
         get() = targetContext.resources
