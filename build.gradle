@@ -1,17 +1,18 @@
 dependencies {
     testImplementation project(":modules:ui:activity")
 
-    implementation "$module_dependencies.testing.junit"
-    implementation "$module_dependencies.testing.mockito"
-    implementation("$module_dependencies.testing.espresso", {
+    implementation "androidx.test:core:$versions.androidxTestCore"
+    implementation "junit:junit:$versions.junit"
+    implementation "org.mockito:mockito-core:$versions.mockito"
+    implementation("androidx.test.espresso:espresso-core:$versions.espresso", {
         exclude group: 'com.android.support', module: 'support-annotations'
     })
-    implementation "$module_dependencies.testing.rules"
-    implementation "$module_dependencies.testing.runner"
+    implementation "androidx.test:rules:$versions.androidxTestRules"
+    implementation "androidx.test:runner:$versions.androidx"
 
-    implementation "$module_dependencies.google.annotations"
-    implementation "$module_dependencies.google.appcompat"
-    implementation "$module_dependencies.kotlin.reflection"
+    implementation "androidx.annotation:annotation:$versions.androidx"
+    implementation "androidx.appcompat:appcompat:$versions.appcompat"
+    implementation "org.jetbrains.kotlin:kotlin-reflect:$versions.kotlin"
 
     api project(":modules:util")
 }
