@@ -76,7 +76,7 @@ class ViewHeightIs(private val expectedHeightPx: Int, fuzzPx: Int = 1) : FuzzyVi
     override fun matchesSafely(item: View?): Boolean {
         val actualHeightPx = item?.measuredHeight ?: 0
         actualMessage.append("${actualHeightPx}px")
-        return actualHeightPx.fuzzyEquals(expectedHeightPx, fuzz = fuzzPx) ?: false
+        return actualHeightPx.fuzzyEquals(expectedHeightPx, fuzz = fuzzPx)
     }
 }
 
@@ -123,7 +123,7 @@ class ViewWidthIs(private val expectedWidthPx: Int, fuzzPx: Int = 1) : FuzzyView
     override fun matchesSafely(item: View?): Boolean {
         val actualWidthPx = item?.measuredWidth ?: 0
         actualMessage.append("${actualWidthPx}px")
-        return expectedWidthPx.fuzzyEquals(actualWidthPx, fuzz = fuzzPx) ?: false
+        return expectedWidthPx.fuzzyEquals(actualWidthPx, fuzz = fuzzPx)
     }
 }
 
